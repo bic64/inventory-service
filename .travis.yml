@@ -10,5 +10,5 @@ script:
 
 after_script:
   - docker run -d -p 8081:8080 -t inventory-service
-  - curl http://localhost:8081
+  - curl http://localhost:8081/greeting
 
