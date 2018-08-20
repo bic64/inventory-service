@@ -1,0 +1,14 @@
+language: java
+jdk: openjdk10
+
+services:
+  - docker
+
+script:
+  - ./gradlew clean application:build
+  - docker build . -t inventory-service
+
+after_script:
+  - docker run -d -p 8081:8080 -t inventory-service
+  - curl http://localhost:8081
+

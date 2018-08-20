@@ -13,6 +13,15 @@ apply plugin: 'io.spring.dependency-management'
 sourceCompatibility = 10
 
 
+bootJar {
+    baseName = 'application'
+    version = ''
+//
+//    manifest {
+//        attributes 'Start-Class': ${mainClassName}
+//    }
+}
+
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
     compile("org.springframework.boot:spring-boot-starter-web")
