@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @RestController()
-@RequestMapping("/greeting")
-public class GreetingController {
+@RequestMapping("/another")
+public class AnotherController {
     private final static AtomicInteger COUNTER = new AtomicInteger(0);
     private static String appName;
 
 
-    public GreetingController(@Value("${spring.application.name}") String appName) {
+    public AnotherController(@Value("${spring.application.name}") String appName) {
         this.appName = appName;
     }
 
 
     @GetMapping()
     public String greeting(@RequestParam(value = "name", defaultValue = "partner") String name) {
-        return "Welcome to " + appName + ", " + name + ". You are number: " + COUNTER.addAndGet(1);
+        return "Welcome to another" + appName + ", " + name + ". You are number: " + COUNTER.addAndGet(1);
     }
 
     @GetMapping("/json")

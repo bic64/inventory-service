@@ -10,7 +10,7 @@ buildscript {
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-sourceCompatibility = 10
+sourceCompatibility = 12
 
 
 bootJar {
