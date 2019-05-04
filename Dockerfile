@@ -1,8 +1,8 @@
-FROM openjdk:10-jdk-slim
+FROM openjdk:12-jdk
 
 EXPOSE 8080
 
-COPY ./application/build/libs/application.jar /usr/local/inventory-service/
+ADD ./application/build/libs/application.jar /usr/local/inventory-service/
 
 
 CMD ["java"\

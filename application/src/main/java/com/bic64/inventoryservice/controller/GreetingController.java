@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/greeting")
 public class GreetingController {
 
-    private static final String template = "Welcome to %s";
-
     private static String appName;
 
 
@@ -20,8 +18,7 @@ public class GreetingController {
 
 
     @GetMapping()
-    public String greeting(
-            @RequestParam(value = "name", defaultValue = "partner") String name) {
-        return String.format(template, appName) + ", " + name;
+    public String greeting(@RequestParam(value = "name", defaultValue = "partner") String name) {
+        return "Welcome to " + appName + ", " + name;
     }
 }
