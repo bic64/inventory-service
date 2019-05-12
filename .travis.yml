@@ -7,15 +7,15 @@ services:
 # install additional Heroku CLI plug-ins
 before_script:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
-  - echo $HEROKU_API_TOKEN
-
+  - echo $ENVSHOW
+  - echo $ENVNOSHOW
 
 script:
   - "./gradlew clean application:build"
 
 after_script:
 #- docker build . -t inventory-service
-  - docker login --username=_ --password=$HEROKU_API_TOKEN registry.heroku.com
+  - "docker login --username=_ --password=$HEROKU_API_TOKEN registry.heroku.com"
 
 #deploy:
 #  provider: heroku
