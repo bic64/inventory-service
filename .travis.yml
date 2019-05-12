@@ -4,17 +4,10 @@ jdk: openjdk12
 services:
   - docker
 
-
-addons:
-  apt:
-    sources:
-      - heroku
-    packages:
-      - heroku-toolbelt
-
 # install additional Heroku CLI plug-ins
-#before_script:
-#  - heroku plugins:install <package-name>
+before_script:
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+  - echo $HEROKU_API_TOKEN
 
 
 script:
@@ -22,7 +15,6 @@ script:
 
 after_script:
 #- docker build . -t inventory-service
-  - echo $HEROKU_API_TOKEN
   - docker login --username=_ --password=$HEROKU_API_TOKEN registry.heroku.com
 
 #deploy:
