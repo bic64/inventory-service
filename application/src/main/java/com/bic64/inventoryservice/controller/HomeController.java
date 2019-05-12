@@ -12,7 +12,7 @@ public class HomeController {
 
     @GetMapping()
     public String greeting() {
-        return "Welcome home";
+        return "Welcome home1";
     }
 
 }
