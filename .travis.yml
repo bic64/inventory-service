@@ -1,18 +1,38 @@
 language: java
 jdk: openjdk12
-#services:
-#- docker
+
+services:
+  - docker
+
+
+addons:
+  apt:
+    sources:
+      - heroku
+    packages:
+      - heroku-toolbelt
+
+# install additional Heroku CLI plug-ins
+#before_script:
+#  - heroku plugins:install <package-name>
+
+
 script:
-- "./gradlew clean application:build"
-#after_script:
+  - "./gradlew clean application:build"
+
+after_script:
 #- docker build . -t inventory-service
-deploy:
-  provider: heroku
-  app:
-    master: bic64-inventory-service
-    heroku-container-deploy: bic64-inventory-service
-  api_key:
-    secure: xDe3JHkWAYe7LzPHOxQ8rknX+7M2U5w3Qgjr65CV9XWzsO6B49PbwN7k1+irPCn6xQ0Y8gg42gnkM9PdCOYgblmuATIOMfvd05hhZEw2hJxKhlORlM+vMBx+vFqekrrjbgHsDMqWZThJzQTSYQwY8Umyvg/Oj3MxxaEuC5UQ3VgBZeSVo/AUkKajmXydcozF9F2lFoNQ7ZvKTYeDl+z1Er+Fg/ImGZ7BWL9UbeKZ/V0IPDyKdD/fUbXTkPAAQDhWFQ53sktli+dXxsI3u/rcZd1L7HilgMV2Ejl6ygow43bbGu0KnDUZxdo6V9WilZ57SXwid1VmmD1RvqKYG1puqabZy93cekzG7AXHhs2WAuyWoMMb+JFXbL25xYNgAst1AYvb1cNdV+NrqhH3TZkliYV1H3yNvzPcykB7oGdkICC5vOXLOJc/9frAcjKHHlQTWn3NP7eStm1z86+8TPaGRwAA9FbNIUJsWbwVowB0D5ObMiq9dbAIUe/bYe3NGNLT9bebW67LOn1+HB75GF4Pso5T+ZFfrGn6mQ/O1Kfx77DY0nelmGI8RlrcM/e9ydT8sIuqd2fvfq52MxFUGEE8xtydDRbgW3ZgUMyOta3aeSU7jipfsK9V6iNKTWluqdEXw0q0RFe4jiG+MpsjLDbkp9gnbTq/BsfY9/GuDYHEy2U=
-  run:
-    - "heroku container:push web --app bic64-inventory-service"
-    - "heroku container:release web --app bic64-inventory-service"
+  - echo $HEROKU_API_TOKEN
+  - docker login --username=_ --password=$HEROKU_API_TOKEN registry.heroku.com
+
+#deploy:
+#  provider: heroku
+#  strategy:
+#  app:
+#    master: bic64-inventory-service
+#    heroku-container-deploy: bic64-inventory-service
+#  api_key:
+#    secure: xDe3JHkWAYe7LzPHOxQ8rknX+7M2U5w3Qgjr65CV9XWzsO6B49PbwN7k1+irPCn6xQ0Y8gg42gnkM9PdCOYgblmuATIOMfvd05hhZEw2hJxKhlORlM+vMBx+vFqekrrjbgHsDMqWZThJzQTSYQwY8Umyvg/Oj3MxxaEuC5UQ3VgBZeSVo/AUkKajmXydcozF9F2lFoNQ7ZvKTYeDl+z1Er+Fg/ImGZ7BWL9UbeKZ/V0IPDyKdD/fUbXTkPAAQDhWFQ53sktli+dXxsI3u/rcZd1L7HilgMV2Ejl6ygow43bbGu0KnDUZxdo6V9WilZ57SXwid1VmmD1RvqKYG1puqabZy93cekzG7AXHhs2WAuyWoMMb+JFXbL25xYNgAst1AYvb1cNdV+NrqhH3TZkliYV1H3yNvzPcykB7oGdkICC5vOXLOJc/9frAcjKHHlQTWn3NP7eStm1z86+8TPaGRwAA9FbNIUJsWbwVowB0D5ObMiq9dbAIUe/bYe3NGNLT9bebW67LOn1+HB75GF4Pso5T+ZFfrGn6mQ/O1Kfx77DY0nelmGI8RlrcM/e9ydT8sIuqd2fvfq52MxFUGEE8xtydDRbgW3ZgUMyOta3aeSU7jipfsK9V6iNKTWluqdEXw0q0RFe4jiG+MpsjLDbkp9gnbTq/BsfY9/GuDYHEy2U=
+#  run:
+#    - "heroku container:push web --app bic64-inventory-service"
+#    - "heroku container:release web --app bic64-inventory-service"
